@@ -8,8 +8,6 @@ export default function Books() {
     "https://fakerestapi.azurewebsites.net/api/v1/Books"
   );
 
-  console.log(data);
-
   return (
     <div className="books">
       {error && <p className="error">{error}</p>}
