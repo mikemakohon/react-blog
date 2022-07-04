@@ -1,20 +1,29 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./BookList.css";
+import { CardTitle, CardBody, CardText, Button } from "reactstrap";
+import { StyledContainer, StyledCard } from "./styled";
 
 export default function BookList({ books }) {
   return (
-    <div className="book-list">
+    <StyledContainer>
       {books.map((book) => (
-        <div key={book.id} className="card">
-          <h3>{book.title}</h3>
-          <p className="description">{book.description.substring(0, 100)}...</p>
-          <p className="date">
-            {new Date(book.publishDate).toLocaleDateString()}
-          </p>
-          <Link to={`/books/${book.id}`}>Read More</Link>
-        </div>
+        <StyledCard body color="light" key={book.id}>
+          <CardBody>
+            <CardTitle tag="h3">{book.title}</CardTitle>
+            <CardText className="description">
+              {book.description.substring(0, 100)}...
+            </CardText>
+            <CardText className="date">
+              {new Date(book.publishDate).toLocaleDateString()}
+            </CardText>
+            <Link to={`/books/${book.id}`}>
+              <Button color="secondary" outline>
+                Read More
+              </Button>
+            </Link>
+          </CardBody>
+        </StyledCard>
       ))}
-    </div>
+    </StyledContainer>
   );
 }

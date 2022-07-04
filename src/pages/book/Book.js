@@ -1,26 +1,31 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useFetch } from "../../hooks/useFetch";
-
-import "./Book.css";
+import { useAxios } from "../../hooks/useAxios";
+import { CardBody, CardTitle, CardText } from "reactstrap";
+import { StyledContainer, StyledCard } from "./styled";
+import Spinner from "../../components/Spinner";
 
 export default function Book() {
   const { id } = useParams();
-  const url = "https://fakerestapi.azurewebsites.net/api/v1/Books/" + id;
-  const { error, isPending, data: book } = useFetch(url);
+  const url = `/Books/${id}`;
+  const { error, loading, data: book } = useAxios(url);
 
   return (
-    <div className="book">
+    <StyledContainer className="book">
       {error && <p className="error">{error}</p>}
-      {isPending && <p className="loading">Loading...</p>}
-      {book && (
-        <>
-          <h2 className="page-title">{book.title}</h2>
-          <p>{book.description}</p>
-          <p>Pages: {book.pageCount}</p>
-          <p>{new Date(book.publishDate).toLocaleDateString()}</p>
-        </>
+      {loading && !book && <Spinner />}
+      {book && !loading && !error && (
+        <StyledCard body color="light" outline>
+          <CardBody>
+            <CardTitle tag="h1">{book.title}</CardTitle>
+            <CardText>{book.description}</CardText>
+            <CardText>Pages: {book.pageCount}</CardText>
+            <CardText>
+              {new Date(book.publishDate).toLocaleDateString()}
+            </CardText>
+          </CardBody>
+        </StyledCard>
       )}
-    </div>
+    </StyledContainer>
   );
 }

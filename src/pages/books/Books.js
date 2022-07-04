@@ -1,18 +1,17 @@
 import React from "react";
-import "./Books.css";
 import BookList from "../../components/BookList/BookList";
-import { useFetch } from "../../hooks/useFetch";
+import { StyledContainer } from "./styled";
+import { useAxios } from "../../hooks/useAxios";
+import Spinner from "../../components/Spinner";
 
 export default function Books() {
-  const { data, isPending, error } = useFetch(
-    "https://fakerestapi.azurewebsites.net/api/v1/Books"
-  );
+  const { data, loading, error } = useAxios("/Books");
 
   return (
-    <div className="books">
+    <StyledContainer>
       {error && <p className="error">{error}</p>}
-      {isPending && <p className="loading">Loading...</p>}
-      {data && <BookList books={data} />}
-    </div>
+      {loading && !data && <Spinner />}
+      {data && !loading && !error && <BookList books={data} />}
+    </StyledContainer>
   );
 }

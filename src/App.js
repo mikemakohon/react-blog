@@ -6,7 +6,7 @@ import Books from "./pages/books";
 import Book from "./pages/book";
 import Statistics from "./pages/statistics";
 
-import Navbar from "./components/Navbar";
+import Header from "./components/Header";
 
 import GlobalStyles from "./components/styles/Global";
 
@@ -15,7 +15,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <GlobalStyles />
-        <Navbar />
+        <Header />
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/books" element={<Books />} />
