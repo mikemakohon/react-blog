@@ -1,14 +1,15 @@
 import React from "react";
+import moment from "moment";
 import { useParams } from "react-router-dom";
 import { useAxios } from "../../hooks/useAxios";
 import { CardBody, CardTitle, CardText } from "reactstrap";
 import { StyledContainer, StyledCard } from "./styled";
 import Spinner from "../../components/Spinner";
+import { getBook } from "../../api/books";
 
 export default function Book() {
-  const { id } = useParams();
-  const url = `/Books/${id}`;
-  const { error, loading, data: book } = useAxios(url);
+  const { id: bookID } = useParams();
+  const { error, loading, data: book } = useAxios(() => getBook(bookID));
 
   return (
     <StyledContainer className="book">
@@ -21,7 +22,7 @@ export default function Book() {
             <CardText>{book.description}</CardText>
             <CardText>Pages: {book.pageCount}</CardText>
             <CardText>
-              {new Date(book.publishDate).toLocaleDateString()}
+              {moment(book.publishDate).format("MMM DD YYYY")}
             </CardText>
           </CardBody>
         </StyledCard>

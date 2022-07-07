@@ -1,14 +1,14 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Home from "./pages/home";
-import Books from "./pages/books";
-import Book from "./pages/book";
-import Statistics from "./pages/statistics";
+import Home from "./pages/Home";
+import Books from "./pages/Books";
+import Book from "./pages/Book";
+import Statistics from "./pages/Statistics";
 
 import Header from "./components/Header";
 
-import GlobalStyles from "./components/styles/Global";
+import GlobalStyles from "./styles/Global";
 
 function App() {
   return (

@@ -1,12 +1,13 @@
 import React from "react";
+import moment from "moment";
 import { Table } from "reactstrap";
 import { useAxios } from "../../hooks/useAxios";
 import { StyledContainer } from "./styled";
 import Spinner from "../../components/Spinner";
+import { getBooks } from "../../api/books";
 
 export default function Statistics() {
-  const url = "/Books";
-  const { data: books, loading, error } = useAxios(url);
+  const { data: books, loading, error } = useAxios(getBooks);
 
   return (
     <StyledContainer>
@@ -30,7 +31,7 @@ export default function Statistics() {
                 <td>{book.title}</td>
                 <td>{book.description.substring(0, 100)}...</td>
                 <td>{book.pageCount}</td>
-                <td>{new Date(book.publishDate).toLocaleDateString()}</td>
+                <td>{moment(book.publishDate).format("MMM DD YYYY")}</td>
               </tr>
             ))}
           </tbody>

@@ -3,9 +3,10 @@ import BookList from "../../components/BookList/BookList";
 import { StyledContainer } from "./styled";
 import { useAxios } from "../../hooks/useAxios";
 import Spinner from "../../components/Spinner";
+import { getBooks } from "../../api/books";
 
 export default function Books() {
-  const { data, loading, error } = useAxios("/Books");
+  const { data, loading, error } = useAxios(getBooks);
 
   return (
     <StyledContainer>
