@@ -1,13 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import { Table } from "reactstrap";
-import { useAxios } from "../../hooks/useAxios";
 import { StyledContainer } from "./styled";
 import Spinner from "../../components/Spinner";
-import { getBooks } from "../../api/books";
+import { statisticsFetchStart } from "./actions/statistics";
+// import { useAxios } from "../../hooks/useAxios";
+// import { getBooks } from "../../api/books";
+
+import * as selectors from "./selectors/statistics";
 
 export default function Statistics() {
-  const { data: books, loading, error } = useAxios(getBooks);
+  // const { data: books, loading, error } = useAxios(getBooks);
+
+  const dispatch = useDispatch();
+  const loading = useSelector(selectors.statisticsLoadingSelector);
+  const error = useSelector(selectors.statisticsErrorSelector);
+  const books = useSelector((state) => selectors.statisticsDataSelector(state));
+
+  useEffect(() => {
+    dispatch(statisticsFetchStart());
+  }, [dispatch]);
 
   return (
     <StyledContainer>

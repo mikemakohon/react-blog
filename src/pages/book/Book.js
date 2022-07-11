@@ -1,15 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 import moment from "moment";
-import { useParams } from "react-router-dom";
-import { useAxios } from "../../hooks/useAxios";
 import { CardBody, CardTitle, CardText } from "reactstrap";
 import { StyledContainer, StyledCard } from "./styled";
 import Spinner from "../../components/Spinner";
-import { getBook } from "../../api/books";
+import { bookFetchStart } from "./actions/book";
+// import { useAxios } from "../../hooks/useAxios";
+// import { getBook } from "../../api/books";
+
+import * as selectors from "./selectors/book";
 
 export default function Book() {
   const { id: bookID } = useParams();
-  const { error, loading, data: book } = useAxios(() => getBook(bookID));
+  // const { error, loading, data: book } = useAxios(() => getBook(bookID));
+
+  const loading = useSelector(selectors.bookLoadingSelector);
+  const book = useSelector((state) => selectors.bookDataSelector(state));
+  const error = useSelector(selectors.bookErrorSelector);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(bookFetchStart(bookID));
+  }, [dispatch, bookID]);
 
   return (
     <StyledContainer className="book">

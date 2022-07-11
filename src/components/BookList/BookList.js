@@ -7,7 +7,7 @@ import Pagination from "../Pagination";
 
 export default function BookList({ books }) {
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(6);
+  const [itemsPerPage, setItemsPerPage] = useState(200);
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -37,11 +37,11 @@ export default function BookList({ books }) {
           </CardBody>
         </StyledCard>
       ))}
-      <Pagination
+      {/* <Pagination
         itemsPerPage={itemsPerPage}
         totalItems={books.length}
         paginate={paginate}
-      />
+      /> */}
     </StyledContainer>
   );
 }
