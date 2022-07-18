@@ -4,7 +4,7 @@ import moment from "moment";
 import { Table } from "reactstrap";
 import { StyledContainer } from "./styled";
 import Spinner from "../../components/Spinner";
-import { statisticsFetchStart } from "./actions/statistics";
+import { statisticsFetchStart } from "./thunks/statistics";
 // import { useAxios } from "../../hooks/useAxios";
 // import { getBooks } from "../../api/books";
 
@@ -16,7 +16,7 @@ export default function Statistics() {
   const dispatch = useDispatch();
   const loading = useSelector(selectors.statisticsLoadingSelector);
   const error = useSelector(selectors.statisticsErrorSelector);
-  const books = useSelector((state) => selectors.statisticsDataSelector(state));
+  const books = useSelector(selectors.statisticsDataSelector);
 
   useEffect(() => {
     dispatch(statisticsFetchStart());
@@ -25,7 +25,7 @@ export default function Statistics() {
   return (
     <StyledContainer>
       {error && <p className="error">{error}</p>}
-      {loading && !books && <Spinner />}
+      {loading && <Spinner />}
       {books && !loading && !error && (
         <Table bordered responsive>
           <thead>

@@ -1,8 +1,7 @@
-import {
-  STATISTICS_FETCH_IN_PROGRESS,
-  STATISTICS_FETCH_SUCCESS,
-  STATISTICS_FETCH_ERROR,
-} from "../action-types/statistics";
+import { createSlice } from "@reduxjs/toolkit";
+import { statisticsFetchStart } from "../thunks/statistics";
+
+import * as actions from "../actions/statistics";
 
 const initialState = {
   data: [],
@@ -10,23 +9,25 @@ const initialState = {
   loading: true,
 };
 
-const statisticsReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case STATISTICS_FETCH_IN_PROGRESS: {
-      return { ...state, loading: true, error: null };
-    }
+const statisticsSlice = createSlice({
+  name: "statistics",
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(
+        statisticsFetchStart.pending,
+        actions.statisticsFetchInProgressAction
+      )
+      .addCase(
+        statisticsFetchStart.fulfilled,
+        actions.statisticsFetchSuccessAction
+      )
+      .addCase(
+        statisticsFetchStart.rejected,
+        actions.statisticsFetchErrorAction
+      );
+  },
+});
 
-    case STATISTICS_FETCH_SUCCESS: {
-      const { data } = action.payload;
-      return { ...state, data, loading: false };
-    }
-
-    case STATISTICS_FETCH_ERROR:
-      return { ...state, loading: false, error: true };
-
-    default:
-      return state;
-  }
-};
-
-export default statisticsReducer;
+export default statisticsSlice.reducer;

@@ -5,7 +5,7 @@ import moment from "moment";
 import { CardBody, CardTitle, CardText } from "reactstrap";
 import { StyledContainer, StyledCard } from "./styled";
 import Spinner from "../../components/Spinner";
-import { bookFetchStart } from "./actions/book";
+import { bookFetchStart } from "./thunks/book";
 // import { useAxios } from "../../hooks/useAxios";
 // import { getBook } from "../../api/books";
 
@@ -16,7 +16,7 @@ export default function Book() {
   // const { error, loading, data: book } = useAxios(() => getBook(bookID));
 
   const loading = useSelector(selectors.bookLoadingSelector);
-  const book = useSelector((state) => selectors.bookDataSelector(state));
+  const book = useSelector(selectors.bookDataSelector);
   const error = useSelector(selectors.bookErrorSelector);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -28,7 +28,7 @@ export default function Book() {
   return (
     <StyledContainer className="book">
       {error && <p className="error">{error}</p>}
-      {loading && !book && <Spinner />}
+      {loading && <Spinner />}
       {book && !loading && !error && (
         <StyledCard body color="light" outline>
           <CardBody>

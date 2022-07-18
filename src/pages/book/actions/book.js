@@ -1,24 +1,15 @@
-import {
-  BOOK_FETCH_ERROR,
-  BOOK_FETCH_IN_PROGRESS,
-  BOOK_FETCH_START,
-  BOOK_FETCH_SUCCESS,
-} from "../action-types/book";
+export const bookFetchSuccessAction = (state, action) => {
+  const { data } = action.payload;
+  state.data = data;
+  state.loading = false;
+};
 
-export const bookFetchStart = (id) => ({
-  type: BOOK_FETCH_START,
-  payload: { id },
-});
+export const bookFetchInProgressAction = (state) => {
+  state.loading = true;
+  state.error = null;
+};
 
-export const bookFetchInProgress = () => ({
-  type: BOOK_FETCH_IN_PROGRESS,
-});
-
-export const bookFetchSuccess = (data) => ({
-  type: BOOK_FETCH_SUCCESS,
-  payload: { data },
-});
-
-export const bookFetchError = () => ({
-  type: BOOK_FETCH_ERROR,
-});
+export const bookFetchErrorAction = (state) => {
+  state.loading = false;
+  state.error = true;
+};

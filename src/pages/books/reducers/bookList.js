@@ -1,8 +1,7 @@
-import {
-  BOOK_LIST_FETCH_IN_PROGRESS,
-  BOOK_LIST_FETCH_SUCCESS,
-  BOOK_LIST_FETCH_ERROR,
-} from "../action-types/bookList";
+import { createSlice } from "@reduxjs/toolkit";
+import { bookListFetchStart } from "../thunks/bookList";
+
+import * as actions from "../actions/bookList";
 
 const initialState = {
   data: [],
@@ -10,23 +9,19 @@ const initialState = {
   loading: true,
 };
 
-const bookListReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case BOOK_LIST_FETCH_IN_PROGRESS: {
-      return { ...state, loading: true, error: null };
-    }
+const bookListSlice = createSlice({
+  name: "bookList",
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(
+        bookListFetchStart.pending,
+        actions.bookListFetchInProgressAction
+      )
+      .addCase(bookListFetchStart.fulfilled, actions.bookListFetchSuccessAction)
+      .addCase(bookListFetchStart.rejected, actions.bookListFetchErrorAction);
+  },
+});
 
-    case BOOK_LIST_FETCH_SUCCESS: {
-      const { data } = action.payload;
-      return { ...state, data, loading: false };
-    }
-
-    case BOOK_LIST_FETCH_ERROR:
-      return { ...state, loading: false, error: true };
-
-    default:
-      return state;
-  }
-};
-
-export default bookListReducer;
+export default bookListSlice.reducer;

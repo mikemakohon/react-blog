@@ -1,25 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import moment from "moment";
 import { Link } from "react-router-dom";
 import { CardTitle, CardBody, CardText, Button } from "reactstrap";
 import { StyledContainer, StyledCard } from "./styled";
-import Pagination from "../Pagination";
 
 export default function BookList({ books }) {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(200);
-
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = books.slice(indexOfFirstItem, indexOfLastItem);
-
-  const paginate = (itemNumber) => {
-    setCurrentPage(itemNumber);
-  };
-
   return (
     <StyledContainer>
-      {currentItems.map((book) => (
+      {books.map((book) => (
         <StyledCard body color="light" key={book.id}>
           <CardBody>
             <CardTitle tag="h3">{book.title}</CardTitle>
@@ -37,11 +25,6 @@ export default function BookList({ books }) {
           </CardBody>
         </StyledCard>
       ))}
-      {/* <Pagination
-        itemsPerPage={itemsPerPage}
-        totalItems={books.length}
-        paginate={paginate}
-      /> */}
     </StyledContainer>
   );
 }
