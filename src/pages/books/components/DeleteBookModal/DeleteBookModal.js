@@ -15,16 +15,9 @@ export const DeleteBookModal = ({ onSave, onCancel }) => {
       {!loading && data && (
         <Space direction="vertical">
           <Title level={5}>
-            Are you sure that you want to delete{" "}
-            <Text underline italic>
-              {data.title}
-            </Text>
-            ?
+            Are you sure that you want to delete {data.title}?
           </Title>
-
-          <Text>
-            The item will be deleted immediately. You can not undo this action.
-          </Text>
+          <Text>This action is irreversible</Text>
         </Space>
       )}
     </Modal>

@@ -1,18 +1,8 @@
 import React from "react";
 import { useForm, Controller } from "react-hook-form";
+import { Input, Typography } from "antd";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { Input, Typography } from "antd";
-
-const CreateBookSchema = yup.object().shape({
-  title: yup.string().required("This field is required"),
-  description: yup.string().required("This field is required"),
-  pageCount: yup
-    .number()
-    .required("This field is required")
-    .integer("Value must be an integer")
-    .positive("Value must be a positive number."),
-});
 
 export const BookForm = (props) => {
   const { mode, data, name, onSave } = props;
@@ -50,9 +40,7 @@ export const BookForm = (props) => {
           defaultValue={data?.title || ""}
         />
         {errors.title && (
-          <Text style={{ display: "block" }} type="danger">
-            {errors.title.message}
-          </Text>
+          <Text style={{ display: "block" }}>{errors.title.message}</Text>
         )}
         <label>Description</label>
         <Controller
@@ -64,9 +52,7 @@ export const BookForm = (props) => {
           defaultValue={data?.description || ""}
         />
         {errors.description && (
-          <Text style={{ display: "block" }} type="danger">
-            {errors.description.message}
-          </Text>
+          <Text style={{ display: "block" }}>{errors.description.message}</Text>
         )}
 
         <label>Page Count</label>
@@ -77,11 +63,19 @@ export const BookForm = (props) => {
           defaultValue={data?.pageCount}
         />
         {errors.pageCount && (
-          <Text style={{ display: "block" }} type="danger">
-            {errors.pageCount.message}
-          </Text>
+          <Text style={{ display: "block" }}>{errors.pageCount.message}</Text>
         )}
       </form>
     </>
   );
 };
+
+const CreateBookSchema = yup.object().shape({
+  title: yup.string().required("Field is required"),
+  description: yup.string().required("Field is required"),
+  pageCount: yup
+    .number()
+    .required("Field is required")
+    .integer("Must be an integer")
+    .positive("Must be a positive number."),
+});

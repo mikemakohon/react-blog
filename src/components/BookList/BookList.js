@@ -2,7 +2,12 @@ import React from "react";
 import moment from "moment";
 import { Link } from "react-router-dom";
 import { CardTitle, CardBody, CardText, Button } from "reactstrap";
-import { StyledContainer, StyledCard } from "./styled";
+import {
+  StyledContainer,
+  StyledCard,
+  StyledEditButton,
+  StyledDeleteButton,
+} from "./styled";
 
 export default function BookList({ books, onEdit, onDelete }) {
   return (
@@ -11,8 +16,8 @@ export default function BookList({ books, onEdit, onDelete }) {
         <StyledCard body color="light" key={book.id}>
           <CardBody>
             <div style={{ textAlign: "right", gap: "10px" }}>
-              <Button onClick={onEdit}>Edit</Button>
-              <Button onClick={onDelete}>Delete</Button>
+              <StyledEditButton onClick={onEdit}>Edit</StyledEditButton>
+              <StyledDeleteButton onClick={onDelete}>Delete</StyledDeleteButton>
             </div>
             <CardTitle tag="h3">{book.title}</CardTitle>
             <CardText className="description">

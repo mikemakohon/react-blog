@@ -12,7 +12,6 @@ export const Modal = ({ loading, children, onCancel, formName, onSave }) => {
         <Button
           key="submit"
           type="primary"
-          danger
           loading={loading}
           htmlType="submit"
           form={formName}
