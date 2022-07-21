@@ -17,3 +17,27 @@ export const getBook = async (id) => {
     return Promise.reject(error.title);
   }
 };
+
+export const createBook = async (data) => {
+  try {
+    return await client.post("/Books", { ...data });
+  } catch (error) {
+    return Promise.reject(error.title);
+  }
+};
+
+export const updateBook = async (data, id) => {
+  try {
+    return await client.patch(`/Books/${id}`, { ...data });
+  } catch (error) {
+    return Promise.reject(error.title);
+  }
+};
+
+export const deleteBook = async (id) => {
+  try {
+    return await client.delete(`/Books/${id}`);
+  } catch (error) {
+    return Promise.reject(error.title);
+  }
+};

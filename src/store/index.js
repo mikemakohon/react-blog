@@ -25,19 +25,28 @@
 // const store = createStore(rootReducer, enhancer);
 // sagaMiddleware.run(rootSaga);
 
+// import { configureStore } from "@reduxjs/toolkit";
+// import bookReducer from "../pages/Book/reducers/book";
+// import bookListReducer from "../pages/Books/reducers/bookList";
+// import statisticsReducer from "../pages/Statistics/reducers/statistics";
+// import paginationReducer from "../components/Pagination/reducers/pagination";
+
+// const store = configureStore({
+//   reducer: {
+//     book: bookReducer,
+//     bookList: bookListReducer,
+//     statistics: statisticsReducer,
+//     pagination: paginationReducer,
+//   },
+// });
+
+// export default store;
+
 import { configureStore } from "@reduxjs/toolkit";
-import bookReducer from "../pages/Book/reducers/book";
-import bookListReducer from "../pages/Books/reducers/bookList";
-import statisticsReducer from "../pages/Statistics/reducers/statistics";
-import paginationReducer from "../components/Pagination/reducers/pagination";
+import rootReducer from "./reducers";
 
 const store = configureStore({
-  reducer: {
-    book: bookReducer,
-    bookList: bookListReducer,
-    statistics: statisticsReducer,
-    pagination: paginationReducer,
-  },
+  reducer: rootReducer,
 });
 
 export default store;

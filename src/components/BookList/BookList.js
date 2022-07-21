@@ -4,12 +4,16 @@ import { Link } from "react-router-dom";
 import { CardTitle, CardBody, CardText, Button } from "reactstrap";
 import { StyledContainer, StyledCard } from "./styled";
 
-export default function BookList({ books }) {
+export default function BookList({ books, onEdit, onDelete }) {
   return (
     <StyledContainer>
       {books.map((book) => (
         <StyledCard body color="light" key={book.id}>
           <CardBody>
+            <div style={{ textAlign: "right", gap: "10px" }}>
+              <Button onClick={onEdit}>Edit</Button>
+              <Button onClick={onDelete}>Delete</Button>
+            </div>
             <CardTitle tag="h3">{book.title}</CardTitle>
             <CardText className="description">
               {book.description.substring(0, 100)}...

@@ -41,3 +41,18 @@ export const bookListCurrentItemsSelector = createSelector(
     return bookList.data.slice(firstItemIndex, lastItemIndex);
   }
 );
+
+export const bookListUpdateStateSelector = createSelector(
+  bookListStateSelector,
+  (bookList) => bookList.updateState
+);
+
+export const bookListCreateStateSelector = createSelector(
+  bookListStateSelector,
+  (bookList) => bookList.createState
+);
+
+export const bookListDeleteStateSelector = createSelector(
+  bookListStateSelector,
+  (bookList) => bookList.deleteState
+);
