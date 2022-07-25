@@ -3,6 +3,7 @@ import { Modal } from "../../../../components/Modal";
 import { bookListDeleteStateSelector } from "../../selectors/bookList";
 import Spin from "antd/lib/spin";
 import { Space, Typography } from "antd";
+import PropTypes from "prop-types";
 
 export const DeleteBookModal = ({ onSave, onCancel }) => {
   const { loading, data } = useSelector(bookListDeleteStateSelector);
@@ -22,4 +23,14 @@ export const DeleteBookModal = ({ onSave, onCancel }) => {
       )}
     </Modal>
   );
+};
+
+DeleteBookModal.propTypes = {
+  onSave: PropTypes.func,
+  onCancel: PropTypes.func,
+};
+
+DeleteBookModal.defaultProps = {
+  onSave: () => {},
+  onCancel: () => {},
 };

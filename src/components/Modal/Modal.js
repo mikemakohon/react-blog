@@ -1,4 +1,6 @@
 import { Button, Modal as AntdModal } from "antd";
+import PropTypes from "prop-types";
+
 export const Modal = ({ loading, children, onCancel, formName, onSave }) => {
   return (
     <AntdModal
@@ -26,6 +28,18 @@ export const Modal = ({ loading, children, onCancel, formName, onSave }) => {
   );
 };
 
+Modal.propTypes = {
+  loading: PropTypes.bool,
+  onCancel: PropTypes.func,
+  onSave: PropTypes.func,
+  formName: PropTypes.string,
+  children: PropTypes.any,
+};
+
 Modal.defaultProps = {
+  loading: true,
   onSave: () => {},
+  onCancel: () => {},
+  formName: "",
+  children: [],
 };

@@ -3,6 +3,7 @@ import { useForm, Controller } from "react-hook-form";
 import { Input, Typography } from "antd";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import PropTypes from "prop-types";
 
 export const BookForm = (props) => {
   const { mode, data, name, onSave } = props;
@@ -79,3 +80,17 @@ const CreateBookSchema = yup.object().shape({
     .integer("Must be an integer")
     .positive("Must be a positive number."),
 });
+
+BookForm.propTypes = {
+  name: PropTypes.string,
+  mode: PropTypes.string,
+  data: PropTypes.array,
+  onSave: PropTypes.func,
+};
+
+BookForm.defaultProps = {
+  name: "",
+  mode: "",
+  data: [],
+  onSave: () => {},
+};

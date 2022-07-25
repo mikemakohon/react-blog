@@ -8,6 +8,7 @@ import {
   StyledEditButton,
   StyledDeleteButton,
 } from "./styled";
+import PropTypes from "prop-types";
 
 export default function BookList({ books, onEdit, onDelete }) {
   return (
@@ -37,3 +38,15 @@ export default function BookList({ books, onEdit, onDelete }) {
     </StyledContainer>
   );
 }
+
+BookList.propTypes = {
+  books: PropTypes.array,
+  onEdit: PropTypes.func,
+  onDelete: PropTypes.func,
+};
+
+BookList.defaultProps = {
+  books: [],
+  onEdit: () => {},
+  onDelete: () => {},
+};

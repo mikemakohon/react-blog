@@ -5,6 +5,7 @@ import { bookListUpdateStateSelector } from "../../selectors/bookList";
 import { bookItemUpdateDataFetch } from "../../thunk/bookList";
 import { BookForm } from "../BookForm/BookForm";
 import Spin from "antd/lib/spin";
+import PropTypes from "prop-types";
 
 export const UpdateBookModal = ({ onSave, onCancel }) => {
   const dispatch = useDispatch();
@@ -23,4 +24,14 @@ export const UpdateBookModal = ({ onSave, onCancel }) => {
       )}
     </Modal>
   );
+};
+
+UpdateBookModal.propTypes = {
+  onSave: PropTypes.func,
+  onCancel: PropTypes.func,
+};
+
+UpdateBookModal.defaultProps = {
+  onSave: () => {},
+  onCancel: () => {},
 };
